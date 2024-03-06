@@ -1,0 +1,121 @@
+# Default configuration file for SCAMP 2.10.0
+# EB 2020-12-07
+#
+ 
+#---------------------------- Reference catalogs ------------------------------
+ 
+REF_SERVER         vizier.cfa.harvard.edu   # Internet addresses of catalog servers
+                                       # Possible mirrors include:
+                                       # vizier.nao.ac.jp,
+                                       # vizier.hia.nrc.ca,
+                                       # vizier.ast.cam.ac.uk,
+                                       # vizier.iucaa.in,
+                                       # vizier.china-vo.org,
+                                       # vizier.cfa.harvard.edu and
+                                       # viziersaao.chpc.ac.za
+ASTREF_CATALOG        FILE          # NONE,FILE,USNO-A2,USNO-B1,GSC-2.3,
+                                       # TYCHO-2,UCAC-4,URAT-1,NOMAD-1,scPPMX,
+                                       # CMC-15,2MASS,DENIS-3,SDSS-R9,SDSS-R12,
+                                       # IGSL,GAIA-DR1,GAIA-DR2,GAIA-EDR3,
+                                       # PANSTARRS-1, or ALLWISE
+ASTREF_BAND            DEFAULT         # Photom. band for astr.ref.magnitudes
+                                       # or DEFAULT, BLUEST, or REDDEST
+ASTREFCAT_NAME         astrefcat.cat   # Local astrometric reference catalogs
+ASTREFCENT_KEYS        XWIN_WORLD, YWIN_WORLD # Local ref.cat. centroid parameters
+ASTREFERR_KEYS         ERRAWIN_WORLD, ERRBWIN_WORLD
+                                       # Local ref.cat. err. ellipse params
+ASTREFPROP_KEYS        PMALPHA_J2000, PMDELTA_J2000 # Local ref.cat. PM params
+ASTREFPROPERR_KEYS     PMALPHAERR_J2000, PMDELTAERR_J2000
+                                       # Local ref.cat. PM err. params
+ASTREFMAG_KEY          MAG             # Local ref.cat. magnitude parameter
+ASTREFMAGERR_KEY       MAGERR          # Local ref.cat. mag. error parameter
+ASTREFOBSDATE_KEY      OBSDATE         # Local ref.cat. obs. date parameter
+ASTREFMAG_LIMITS       -99.0,99.0      # Select magnitude range in ASTREF_BAND
+SAVE_REFCATALOG        Y               # Save ref catalogs in FITS-LDAC format?
+REFOUT_CATPATH         ./               # Save path for reference catalogs
+ 
+#--------------------------- Merged output catalogs ---------------------------
+ 
+MERGEDOUTCAT_TYPE      NONE            # NONE, ASCII_HEAD, ASCII, FITS_LDAC
+MERGEDOUTCAT_NAME      merged.cat      # Merged output catalog filename
+ 
+#--------------------------- Full output catalogs ---------------------------
+ 
+FULLOUTCAT_TYPE        NONE            # NONE, ASCII_HEAD, ASCII, FITS_LDAC
+FULLOUTCAT_NAME        full.cat        # Full output catalog filename
+ 
+#----------------------------- Pattern matching -------------------------------
+ 
+MATCH                  Y               # Do pattern-matching (Y/N) ?
+MATCH_NMAX             0               # Max.number of detections for MATCHing
+                                       # (0=auto)
+PIXSCALE_MAXERR        1.2             # Max scale-factor uncertainty
+POSANGLE_MAXERR        5.0             # Max position-angle uncertainty (deg)
+POSITION_MAXERR        1.0            # Max positional uncertainty (arcmin)
+MATCH_RESOL            0               # Matching resolution (arcsec); 0=auto
+MATCH_FLIPPED          N               # Allow matching with flipped axes?
+MOSAIC_TYPE            LOOSE       # UNCHANGED, SAME_CRVAL, SHARE_PROJAXIS,
+                                       # FIX_FOCALPLANE or LOOSE
+ 
+#---------------------------- Cross-identification ----------------------------
+ 
+CROSSID_RADIUS         5.0             # Cross-id initial radius (arcsec)
+ 
+#---------------------------- Astrometric solution ----------------------------
+ 
+SOLVE_ASTROM           Y               # Compute astrometric solution (Y/N) ?
+PROJECTION_TYPE        SAME            # SAME, TPV or TAN
+ASTRINSTRU_KEY         FILTER          # FITS keyword(s) defining the astrom
+STABILITY_TYPE         EXPOSURE     # EXPOSURE, PRE-DISTORTED or INSTRUMENT
+CENTROID_KEYS          XWIN_IMAGE,YWIN_IMAGE # Cat. parameters for centroiding
+CENTROIDERR_KEYS       ERRAWIN_IMAGE,ERRBWIN_IMAGE,ERRTHETAWIN_IMAGE
+                                       # Cat. params for centroid err ellipse
+DISTORT_KEYS           XWIN_IMAGE,YWIN_IMAGE # Cat. parameters or FITS keywords
+DISTORT_GROUPS         1, 1             # Polynom group for each context key
+DISTORT_DEGREES        3              # Polynom degree for each group
+ASTR_ACCURACY          0.001            # Astrom. uncertainty floor parameter
+
+#---------------------------- Photometric solution ----------------------------
+ 
+SOLVE_PHOTOM           Y               # Compute photometric solution (Y/N) ?
+MAGZERO_OUT            0.0             # Magnitude zero-point(s) in output
+MAGZERO_INTERR         0.01            # Internal mag.zero-point accuracy
+MAGZERO_REFERR         0.03            # Photom.field mag.zero-point accuracy
+PHOTINSTRU_KEY         FILTER          # FITS keyword(s) defining the photom.
+MAGZERO_KEY            MAG_ZPT          # FITS keyword for the mag zero-point
+EXPOTIME_KEY           EXPTIME         # FITS keyword for the exposure time (s)
+AIRMASS_KEY            AIRMASS         # FITS keyword for the airmass
+EXTINCT_KEY            PHOT_K          # FITS keyword for the extinction coeff
+PHOTOMFLAG_KEY         FLAGS        # FITS keyword for the photometry flag
+PHOTFLUX_KEY           FLUX_AUTO       # Catalog param. for the flux measurement
+PHOTFLUXERR_KEY        FLUXERR_AUTO    # Catalog parameter for the flux error
+ 
+#----------------------------- Source selection -------------------------------
+ 
+SN_THRESHOLDS          10.,50.      # S/N thresholds (in sigmas) for all and
+                                       # high-SN sample
+FWHM_THRESHOLDS        3.0,100.0       # FWHM thresholds (in pixels) for sources
+ELLIPTICITY_MAX        0.5             # Max. source ellipticity
+FLAGS_MASK             0x00f0          # Global rejection mask on SEx FLAGS
+ 
+#------------------------------- WCS headers ----------------------------------
+ 
+AHEADER_SUFFIX         .ahead          # Filename extension for additional
+                                       # input headers
+HEADER_SUFFIX          .head           # Filename extension for output headers
+ 
+#------------------------------- Check-plots ----------------------------------
+ 
+CHECKPLOT_DEV          PDF             # NULL, XWIN, TK, PS, PSC, XFIG, PNG,
+                                       # JPEG, AQT, PDF or SVG
+CHECKPLOT_TYPE         DISTORTION,ASTR_CHI2
+CHECKPLOT_NAME         dis,chi2 # Check-plot filename(s)
+ 
+#------------------------------ Miscellaneous ---------------------------------
+ 
+VERBOSE_TYPE           NORMAL            # QUIET, NORMAL, LOG or FULL
+WRITE_XML              N               # Write XML file (Y/N)?
+XML_NAME               scamp.xml       # Filename for XML output
+NTHREADS               0               # Number of simultaneous threads for
+                                       # the SMP version of SCAMP
+                                       # 0 = automatic
